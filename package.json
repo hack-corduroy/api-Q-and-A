@@ -1,0 +1,24 @@
+{
+  "name": "api-Q-and-A",
+  "version": "1.0.0",
+  "description": "Questions and answers API endpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hack-corduroy/api-Q-and-A"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hack-corduroy/api-Q-and-A/issues"
+  },
+  "homepage": "https://github.com/hack-corduroy/api-Q-and-A#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  }
+}
