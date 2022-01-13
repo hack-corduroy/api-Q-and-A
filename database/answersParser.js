@@ -12,6 +12,9 @@ async function processLineByLine() {
     crlfdelay: Infinity
   })
   let isFirstLine = true;
+  let lineCount = 0;
+  let totalCount = 0;
+  let queryStr = '';
   for await (let line of rl) {
     if (isFirstLine) {
       isFirstLine = false;
@@ -27,11 +30,27 @@ async function processLineByLine() {
       }
       line[j] = line[j].replaceAll("'","''");
     }
-    if (! (await pool.query(`SELECT EXISTS (SELECT 1 FROM questions WHERE id = ${parseInt(line[0])})`)).rows[0].exists) {
-      await pool.query(`INSERT INTO questions ( id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful) VALUES (${line[0]}, ${line[1]}, '${line[2]}', '${line[3]}', '${line[4]}', '${line[5]}', '${line[6]}', ${line[7]})`, (err, res) => {
-        // console.log(err, res);
+      lineCount ++;
+      totalCount++;
+      if (lineCount === 1000) {
+        queryStr += `(${line[0]}, ${line[1]}, '${line[2]}', '${line[3]}', '${line[4]}', '${line[5]}', '${line[6]}', ${line[7]})`;
+      } else {
+        queryStr += `(${line[0]}, ${line[1]}, '${line[2]}', '${line[3]}', '${line[4]}', '${line[5]}', '${line[6]}', ${line[7]}), `;
+      }
+
+    if (lineCount === 1000) {
+      await pool.query(`INSERT INTO answers ( id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful) VALUES ${queryStr}`, (err, res) => {
+        //console.log(err, res);
       });
+      queryStr = '';
+      lineCount = 0;
     }
   }
+  // console.log(queryStr)
+  let endStr = queryStr.slice(0, -2);
+  //console.log( endStr)
+  await pool.query(`INSERT INTO answers ( id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful) VALUES ${endStr}`, (err, res) => {
+    console.log(err, res);
+  });
 }
 processLineByLine()
