@@ -10,7 +10,7 @@ CREATE TABLE questions(
   body TEXT NOT NULL,
   date_written TEXT NOT NULL,
   asker_name TEXT NOT NULL,
-  asker_email TEXT NOT NULL,
+  asker_email TEXT,
   reported BOOLEAN NOT NULL,
   helpful INT NOT NULL
 );
@@ -22,7 +22,7 @@ CREATE TABLE answers(
   body TEXT NOT NULL,
   date_written TEXT NOT NULL,
   answerer_name TEXT NOT NULL,
-  answerer_email TEXT NOT NULL,
+  answerer_email TEXT,
   reported BOOLEAN NOT NULL,
   helpful INT NOT NULL
 );

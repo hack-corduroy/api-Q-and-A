@@ -1,4 +1,4 @@
-var pool = require ('./index.js');
+var { pool } = require ('./index.js');
 var fs = require('fs');
 const readline = require('readline');
 
