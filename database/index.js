@@ -34,8 +34,8 @@ let db = {
     await pool.query(`INSERT INTO questions ( id, question_id, body, date_written, asker_name, asker_email, reported, helpful) VALUES (${rows[0].id + 1}, $${question_id}, '${body}', '${date_written}', '${asker_name}', '${asker_email}', '${reported}', ${helpful})`)
     if(photos.length !== 0) {
       photos.forEach(async (photo, i) => {
-        const photoId = await pool.query(`SELECT id FROM photos ORDER BY id DESC LIMIT 1`) + 1;
-        await pool.query(`INSERT INTO photos ( id, answer_id, url) VALUES ${photoId}, ${id}, ${photo[i]}`)
+        const {rows: photoId} = await pool.query(`SELECT id FROM photos ORDER BY id DESC LIMIT 1`);
+        await pool.query(`INSERT INTO photos ( id, answer_id, url) VALUES ${photoId[0].id + 1}, ${id}, ${photo[i]}`)
       })
     }
   },

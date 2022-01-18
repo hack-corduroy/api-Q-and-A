@@ -49,7 +49,6 @@ app.put(`/qa/answers/:answerId/report`, async (req, res) => {
   await reportAnswer(answer_id) .then (() => res.sendStatus(200))
 })
 
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
