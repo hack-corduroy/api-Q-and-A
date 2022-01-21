@@ -15,6 +15,8 @@ CREATE TABLE questions(
   helpful INT NOT NULL
 );
 
+CREATE INDEX product_index ON questions (product_id);
+
 DROP TABLE IF EXISTS answers;
 CREATE TABLE answers(
   id INT PRIMARY KEY,
@@ -27,10 +29,14 @@ CREATE TABLE answers(
   helpful INT NOT NULL
 );
 
+CREATE INDEX question_index ON answers (question_id);
+
 DROP TABLE IF EXISTS photos;
 CREATE TABLE photos(
   id INT PRIMARY KEY,
   answer_id INT REFERENCES answers (id),
   url TEXT NOT NULL
 );
+
+CREATE INDEX answer_index ON photos (answer_id);
 
