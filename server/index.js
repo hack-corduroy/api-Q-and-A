@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
+const cors = require('cors');
 const port = 3000
 const {transformQuestion, transformAnswer, insertQuestion, insertAnswer, helpfulQuestion, reportQuestion, helpfulAnswer, reportAnswer} = require('./controllers.js')
 
+app.use(cors())
 app.use(express.json());
 
 app.get(`/qa/questions/:questionId/answers`, async (req, res) => {

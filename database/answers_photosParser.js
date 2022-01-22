@@ -28,7 +28,7 @@ async function processLineByLine() {
       if (line[j][line[j].length -1] === '"') {
         line[j] = line[j].substr(0, line[j].length - 1)
       }
-      line[j] = line[j].replaceAll("'","''");
+      line[j] = line[j].replace(/'/g,"''");
     }
       lineCount ++;
       totalCount++;
