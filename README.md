@@ -9,7 +9,7 @@
 
 ## Database
 
-After considering the options, decided that Postgres was the way to go.
+I did research on both postgres and cassandra. After considering the options, decided that Postgres was the way to go.
 ![image](https://user-images.githubusercontent.com/91281587/152913139-f4f008f0-654d-41eb-b84e-50a1e3c715d0.png)
 
 
